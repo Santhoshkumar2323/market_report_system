@@ -69,7 +69,7 @@ EMAIL_USER=
 
 EMAIL_PASSWORD=          # Gmail App Password, not your login password
 
-RECIPIENTS=a@x.com,b@x.com
+RECIPIENTS= a@x.com,b@x.com
 
 FRED_API_KEY=            # free at fred.stlouisfed.org
 
