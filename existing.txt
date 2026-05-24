@@ -1,0 +1,3 @@
+pip install --upgrade yfinance
+,logesh822002@gmail.com,venkatdinesh2602@gmail.com,havocjalilu@gmail.com,vanerejoice0208@gmail.com
+,logesh822002@gmail.com,venkatdinesh2602@gmail.com,vishnuvishal419@gmail.com,havocjalilu@gmail.com,vanerejoice0208@gmail.com

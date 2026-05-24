@@ -1,0 +1,59 @@
+winget install PostgreSQL.PostgreSQL.16
+C:\Program Files\PostgreSQL\16
+C:\Program Files\PostgreSQL\16\data
+
+
+Log in (Windows): psql -U postgres
+Log in (Direct Path): & "C:\Program Files\PostgreSQL\16\bin\psql.exe" -U postgres
+Exit / Quit: \q
+
+List Databases: \l (Think: List)
+Connect to a DB: \c database_name 
+List Tables: \dt ( Display Tables)
+Check Table Structure: \d table_name (Shows columns and data types)
+
+
+Create Database: CREATE DATABASE market_reports;
+Delete Database: DROP DATABASE market_reports;
+See All Data: SELECT * FROM table_name;
+Who am I? SELECT current_user;
+
+
+
+1.CHECK TODAYS REPORTS:
+
+SELECT id, report_timestamp, email_sent
+FROM weekly_reports
+ORDER BY id DESC
+LIMIT 5;
+
+email_sent showing? (true / false)
+
+2.Delete Today’s Report:
+
+DELETE FROM weekly_reports
+WHERE report_timestamp::date = CURRENT_DATE;
+
+DELETE 1 → good.
+If DELETE 0 → no report today
+
+3.Clean Email Logs
+DELETE FROM email_log
+WHERE sent_at::date = CURRENT_DATE;
+
+4.EXIT - \q
+
+
+
+& "C:\Program Files\PostgreSQL\16\bin\psql.exe" -U postgres -d market_reports
+
+DELETE FROM weekly_reports
+WHERE report_timestamp = CURRENT_DATE;
+\q
+
+SELECT count(*) FROM weekly_reports WHERE report_timestamp = CURRENT_DATE;
+
+
+
+
+,logesh822002@gmail.com,venkatdinesh2602@gmail.com,vishnuvishal419@gmail.com
