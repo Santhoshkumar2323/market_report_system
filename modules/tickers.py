@@ -1,5 +1,3 @@
-# modules/tickers.py
-
 ASSET_STRUCTURE = {
 
     "Global Indices": {

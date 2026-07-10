@@ -65,9 +65,6 @@ def run_weekly_report():
         session.close()
         return
 
-    # -------------------------
-    # SIGNAL ENGINE
-    # -------------------------
     try:
         signals = compute_signals(snapshot)
     except Exception as e:
@@ -75,18 +72,14 @@ def run_weekly_report():
         session.close()
         return
 
-    # -------------------------
-    # LLM COMMENTARY
-    # -------------------------
+
     try:
         gemini_text = generate_gemini_report(signals)
     except Exception as e:
         print("Gemini failed:", e)
         gemini_text = "Model commentary unavailable this week."
 
-    # -------------------------
-    # SAVE REPORT RECORD
-    # -------------------------
+
     report = WeeklyReport(
         report_timestamp=datetime.now(timezone.utc).date(),
         structured_input_json=json.dumps(snapshot),
@@ -98,10 +91,6 @@ def run_weekly_report():
     session.commit()
 
     report_id = report.id
-
-    # -------------------------
-    # BUILD HTML TABLES
-    # -------------------------
     html_table = generate_html_table(snapshot, week_date)
 
     try:
@@ -116,9 +105,7 @@ def run_weekly_report():
         print("Macro table failed:", e)
         macro_table = ""
 
-    # -------------------------
-    # COMMENTARY SECTION
-    # -------------------------
+
     commentary_html = "<h2>Commentary</h2><ul>"
 
     for line in gemini_text.split("\n"):
@@ -130,9 +117,7 @@ def run_weekly_report():
 
     commentary_html += "</ul><hr>"
 
-    # -------------------------
-    # SIGNAL SUMMARY
-    # -------------------------
+
     signal_html = "<h2>Summary</h2><ul>"
 
     for key, value in signals.items():
@@ -143,9 +128,7 @@ def run_weekly_report():
 
     signal_html += "</ul><hr>"
 
-    # -------------------------
-    # ANALYTICAL BLOCK
-    # -------------------------
+
     analytical_html = f"""
 <div style="font-size:13px;color:#444;margin-top:25px;line-height:1.6;">
 {ANALYTICAL_BLOCK}
@@ -153,9 +136,6 @@ def run_weekly_report():
 <hr style="margin:25px 0;">
 """
 
-    # -------------------------
-    # PROXY BLOCK
-    # -------------------------
     proxy_content = PROXY_BLOCK.replace("{{PROXY_NAME}}", PROXY_NAME)
     proxy_content = proxy_content.replace("{{PROXY_URL}}", PROXY_URL)
 
@@ -174,13 +154,7 @@ font-family:Arial;
 </div>
 """
 
-    # -------------------------
-    # HEADER
-    # -------------------------
 
-    # -------------------------
-    # FINAL EMAIL BODY
-    # -------------------------
     full_email = (
         html_table
         + yield_table
@@ -191,9 +165,6 @@ font-family:Arial;
         + proxy_html
     )
 
-    # -------------------------
-    # SEND EMAIL
-    # -------------------------
     try:
         send_email(
             subject=f"Weekly Macro Snapshot – {week_date} | {datetime.now().strftime('%H:%M')}",

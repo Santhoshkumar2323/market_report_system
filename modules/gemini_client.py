@@ -1,5 +1,3 @@
-# modules/gemini_client.py
-
 import requests
 import json
 from config.settings import settings

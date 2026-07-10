@@ -47,7 +47,6 @@ def fetch_fred_series(series_id, days=400, retries=3):
             print(f"FRED fetch error {series_id} attempt {attempt+1}: {e}")
             time.sleep(wait)
 
-    # -------- fallback smaller query --------
     try:
 
         print(f"FRED fallback query for {series_id}")

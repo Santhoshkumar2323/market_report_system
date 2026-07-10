@@ -1,7 +1,4 @@
-# modules/signal_engine.py
-
 import statistics
-
 
 def compute_average(values):
     return sum(values) / len(values) if values else 0
@@ -19,10 +16,6 @@ def classify_volatility(avg_vol):
 def compute_signals(snapshot):
 
     signals = {}
-
-    # --------------------------
-    # Global Region Strength
-    # --------------------------
     regions = {}
     if "Global Indices" in snapshot:
         for region, assets in snapshot["Global Indices"].items():
@@ -42,9 +35,6 @@ def compute_signals(snapshot):
             else "Mixed across regions"
         )
 
-    # --------------------------
-    # US Sector Leadership
-    # --------------------------
     if "US Sectors" in snapshot:
         sectors = snapshot["US Sectors"].get(None, [])
         if sectors:
@@ -54,9 +44,7 @@ def compute_signals(snapshot):
             signals["strongest_us_sector"] = strongest_sector["name"]
             signals["weakest_us_sector"] = weakest_sector["name"]
 
-    # --------------------------
-    # Commodities
-    # --------------------------
+
     if "Commodities" in snapshot:
         commodities = snapshot["Commodities"].get(None, [])
 
@@ -73,9 +61,6 @@ def compute_signals(snapshot):
         if copper and copper["pct_10d"] < 0:
             signals["commodity_note"] = "Copper showing weakness"
 
-    # --------------------------
-    # Crypto
-    # --------------------------
     if "Crypto" in snapshot:
         crypto_assets = snapshot["Crypto"].get(None, [])
         if crypto_assets:
@@ -87,9 +72,7 @@ def compute_signals(snapshot):
             else:
                 signals["crypto_signal"] = "Risk appetite cautious"
 
-    # --------------------------
-    # Volatility
-    # --------------------------
+
     all_vol = []
     for category in snapshot:
         for region in snapshot[category]:

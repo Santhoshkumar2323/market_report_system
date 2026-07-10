@@ -1,5 +1,3 @@
-# modules/report_builder.py
-
 from sqlalchemy import desc
 from modules.database import get_db_session
 from modules.models import ProcessedMetrics

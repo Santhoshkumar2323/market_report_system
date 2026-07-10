@@ -1,5 +1,3 @@
-# modules/data_processor.py
-
 import numpy as np
 from datetime import datetime, timezone
 from sqlalchemy import and_

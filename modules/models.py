@@ -1,5 +1,3 @@
-# modules/models.py
-
 from sqlalchemy import Column, Integer, String, Float, Date, Text, Boolean
 from modules.database import Base
 

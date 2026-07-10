@@ -1,10 +1,6 @@
 from modules.fred_fetcher import fetch_fred_series
 from datetime import timedelta
 
-# ---------------------------------------------------------
-# COUNTRY SERIES MAP
-# ---------------------------------------------------------
-
 COUNTRY_YIELD_SERIES = {
     "United States": {
         "role": "Global Anchor",
@@ -38,11 +34,6 @@ COUNTRY_YIELD_SERIES = {
     },
 }
 
-
-# ---------------------------------------------------------
-# DELTA CALCULATION (time-aware)
-# ---------------------------------------------------------
-
 def compute_delta(df, months):
 
     if df is None or df.empty:
@@ -67,10 +58,6 @@ def compute_delta(df, months):
         return None
 
 
-# ---------------------------------------------------------
-# CURVE CLASSIFICATION
-# ---------------------------------------------------------
-
 def classify_curve(spread):
 
     if spread is None:
@@ -84,10 +71,6 @@ def classify_curve(spread):
 
     return "Normal"
 
-
-# ---------------------------------------------------------
-# BUILD DATA STRUCTURE
-# ---------------------------------------------------------
 
 def build_yield_table():
 
@@ -141,10 +124,6 @@ def build_yield_table():
     return rows
 
 
-# ---------------------------------------------------------
-# FORMATTERS
-# ---------------------------------------------------------
-
 def fmt_value(value):
     if value is None:
         return "—"
@@ -170,10 +149,6 @@ def fmt_curve(spread, label):
     bps = spread * 100
     return f"{bps:.0f} bps ({label})"
 
-
-# ---------------------------------------------------------
-# HTML GENERATOR
-# ---------------------------------------------------------
 
 def generate_yield_html():
 
