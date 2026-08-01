@@ -1,0 +1,87 @@
+<svg viewBox="0 0 1100 1458" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica,Arial,sans-serif">
+<rect x="0" y="0" width="1100" height="1458" fill="#ffffff"/>
+
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+    <path d="M0,0 L0,6 L9,3 z" fill="#6b7280"/>
+  </marker>
+</defs>
+
+<text x="550.0" y="46" text-anchor="middle" font-size="25" font-weight="800" fill="#111827">Weekly Macro Snapshot — How It Works</text>
+<text x="550.0" y="70" text-anchor="middle" font-size="13.5" fill="#6b7280">Collects market + macro data all week, then every run turns the latest snapshot into one AI-assisted email</text>
+<text x="550.0" y="90" text-anchor="middle" font-size="11.5" fill="#9ca3af">(pill under each box = the source file that does it)</text>
+<text x="190" y="118" font-size="13" font-weight="800" letter-spacing="1.1" fill="#a16207" font-family="Helvetica,Arial,sans-serif">STEP 1 — SETS UP THE DATABASE</text>
+<rect x="190" y="142" width="640" height="120" rx="12" fill="#fef9c3" stroke="#a16207" stroke-width="1.8"/>
+<text x="510.0" y="173" text-anchor="middle" font-size="17" font-weight="700" fill="#713f12" font-family="Helvetica,Arial,sans-serif">Creates the Postgres tables if they don't exist yet</text>
+<text x="510.0" y="198" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">4 tables: raw prices, processed metrics, saved reports, and an email send log</text>
+<rect x="388.45" y="211" width="243.1" height="26" rx="10" fill="#ffffff" stroke="#a16207" stroke-width="1.2" opacity="0.9"/>
+<text x="510.0" y="226" text-anchor="middle" font-size="11.5" fill="#a16207" font-family="Menlo,Consolas,monospace" font-weight="600">main.py → database.py + models.py</text>
+<line x1="550.0" y1="262" x2="550.0" y2="302" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="90" y="302" font-size="13" font-weight="800" letter-spacing="1.1" fill="#1d4ed8" font-family="Helvetica,Arial,sans-serif">STEP 2 — COLLECTS FRESH MARKET DATA FOR EVERY ASSET</text>
+<rect x="90" y="326" width="940" height="142" rx="12" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.8"/>
+<text x="560.0" y="357" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">Fetches the last ~10 days of price data for ~30 tickers (indices, sectors, commodities,</text>
+<text x="560.0" y="379" text-anchor="middle" font-size="17" font-weight="700" fill="#1e3a8a" font-family="Helvetica,Arial,sans-serif">crypto), then computes % change and volatility for each</text>
+<text x="560.0" y="404" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Saves both the raw prices and the computed metrics to Postgres — skips anything already saved for that date, so re-running is safe</text>
+<rect x="314.5" y="417" width="491.0" height="26" rx="10" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.2" opacity="0.9"/>
+<text x="560.0" y="432" text-anchor="middle" font-size="11.5" fill="#1d4ed8" font-family="Menlo,Consolas,monospace" font-weight="600">tickers.py → data_fetcher.py (yfinance) → data_processor.py → Postgres</text>
+<line x1="550.0" y1="468" x2="550.0" y2="508" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="470.4" y="478.0" width="159.20000000000002" height="18" fill="#ffffff"/>
+<text x="550.0" y="492.0" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Helvetica,Arial,sans-serif">a separate run, later ↓</text>
+<text x="90" y="508" font-size="13" font-weight="800" letter-spacing="1.1" fill="#7e22ce" font-family="Helvetica,Arial,sans-serif">STEP 3 — READS BACK THE LATEST WEEK AND INTERPRETS IT</text>
+<rect x="90" y="532" width="940" height="142" rx="12" fill="#f3e8ff" stroke="#7e22ce" stroke-width="1.8"/>
+<text x="560.0" y="563" text-anchor="middle" font-size="17" font-weight="700" fill="#3b0764" font-family="Helvetica,Arial,sans-serif">Pulls the most recently saved week from Postgres, then turns the numbers into plain-language</text>
+<text x="560.0" y="585" text-anchor="middle" font-size="17" font-weight="700" fill="#3b0764" font-family="Helvetica,Arial,sans-serif">signals</text>
+<text x="560.0" y="610" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">e.g. strongest/weakest region, leading/lagging US sector, whether gold &amp; oil are rising together, overall volatility level</text>
+<rect x="428.4" y="623" width="263.20000000000005" height="26" rx="10" fill="#ffffff" stroke="#7e22ce" stroke-width="1.2" opacity="0.9"/>
+<text x="560.0" y="638" text-anchor="middle" font-size="11.5" fill="#7e22ce" font-family="Menlo,Consolas,monospace" font-weight="600">report_builder.py → signal_engine.py</text>
+<line x1="550.0" y1="674" x2="550.0" y2="714" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="454.4" y="684.0" width="191.20000000000002" height="18" fill="#ffffff"/>
+<text x="550.0" y="698.0" text-anchor="middle" font-size="12" fill="#6b7280" font-family="Helvetica,Arial,sans-serif">feeds 3 independent pieces ↓</text>
+<text x="90" y="714" font-size="13" font-weight="800" letter-spacing="1.1" fill="#be185d" font-family="Helvetica,Arial,sans-serif">STEP 4 — BUILDS THREE PIECES OF THE REPORT AT ONCE</text>
+<rect x="75.0" y="738" width="300" height="172" rx="12" fill="#fdf2f8" stroke="#be185d" stroke-width="1.8"/>
+<text x="225.0" y="767" text-anchor="middle" font-size="15" font-weight="700" fill="#831843" font-family="Helvetica,Arial,sans-serif">AI commentary</text>
+<text x="225.0" y="790" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Sends the signals (not raw numbers) to</text>
+<text x="225.0" y="808" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Gemini, gets back 5–8 bullet points.</text>
+<text x="225.0" y="826" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Falls back to a placeholder sentence</text>
+<text x="225.0" y="844" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">if the call fails.</text>
+<rect x="160.4" y="857" width="129.2" height="26" rx="10" fill="#ffffff" stroke="#be185d" stroke-width="1.2" opacity="0.9"/>
+<text x="225.0" y="872" text-anchor="middle" font-size="11.5" fill="#be185d" font-family="Menlo,Consolas,monospace" font-weight="600">gemini_client.py</text>
+<rect x="400.0" y="738" width="300" height="174" rx="12" fill="#fdf2f8" stroke="#be185d" stroke-width="1.8"/>
+<text x="550.0" y="767" text-anchor="middle" font-size="15" font-weight="700" fill="#831843" font-family="Helvetica,Arial,sans-serif">Global bond yields</text>
+<text x="550.0" y="790" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">10Y/2Y yields and curve shape (steep /</text>
+<text x="550.0" y="808" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">normal / inverted) for 6 countries —</text>
+<text x="550.0" y="826" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">independent of the ticker data above</text>
+<rect x="458.6" y="839" width="182.8" height="46" rx="10" fill="#ffffff" stroke="#be185d" stroke-width="1.2" opacity="0.9"/>
+<text x="550.0" y="854" text-anchor="middle" font-size="11.5" fill="#be185d" font-family="Menlo,Consolas,monospace" font-weight="600">yield_table_builder.py →</text>
+<text x="550.0" y="874" text-anchor="middle" font-size="11.5" fill="#be185d" font-family="Menlo,Consolas,monospace" font-weight="600">fred_fetcher.py</text>
+<rect x="725.0" y="738" width="300" height="192" rx="12" fill="#fdf2f8" stroke="#be185d" stroke-width="1.8"/>
+<text x="875.0" y="767" text-anchor="middle" font-size="15" font-weight="700" fill="#831843" font-family="Helvetica,Arial,sans-serif">Liquidity &amp; credit</text>
+<text x="875.0" y="790" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Fed balance sheet, reverse repo, and</text>
+<text x="875.0" y="808" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">credit spreads — also pulled fresh</text>
+<text x="875.0" y="826" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">from FRED, independent of the tickers</text>
+<text x="875.0" y="844" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">above</text>
+<rect x="770.2" y="857" width="209.6" height="46" rx="10" fill="#ffffff" stroke="#be185d" stroke-width="1.2" opacity="0.9"/>
+<text x="875.0" y="872" text-anchor="middle" font-size="11.5" fill="#be185d" font-family="Menlo,Consolas,monospace" font-weight="600">macro_liquidity_builder.py →</text>
+<text x="875.0" y="892" text-anchor="middle" font-size="11.5" fill="#be185d" font-family="Menlo,Consolas,monospace" font-weight="600">fred_fetcher.py</text>
+<path d="M 225.0 930 L 225.0 952 L 550.0 952 L 550.0 958" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 875.0 930 L 875.0 952 L 550.0 952 L 550.0 958" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<line x1="550.0" y1="930" x2="550.0" y2="958" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="90" y="954" font-size="13" font-weight="800" letter-spacing="1.1" fill="#15803d" font-family="Helvetica,Arial,sans-serif">STEP 5 — ASSEMBLES ONE HTML EMAIL AND SAVES IT</text>
+<rect x="90" y="978" width="940" height="160" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="1.8"/>
+<text x="560.0" y="1009" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d" font-family="Helvetica,Arial,sans-serif">Combines the asset tables, yield table, liquidity table, AI commentary, and signal summary</text>
+<text x="560.0" y="1031" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d" font-family="Helvetica,Arial,sans-serif">into one page</text>
+<text x="560.0" y="1056" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Also appends two fixed blocks (a data-reuse note and a newsletter plug) from branding.py — then saves the whole thing as a</text>
+<text x="560.0" y="1074" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">WeeklyReport row before sending anything</text>
+<rect x="361.4" y="1087" width="397.2" height="26" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1.2" opacity="0.9"/>
+<text x="560.0" y="1102" text-anchor="middle" font-size="11.5" fill="#15803d" font-family="Menlo,Consolas,monospace" font-weight="600">main.py → report_builder.py + branding.py → WeeklyReport</text>
+<line x1="550.0" y1="1138" x2="550.0" y2="1178" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="190" y="1178" font-size="13" font-weight="800" letter-spacing="1.1" fill="#15803d" font-family="Helvetica,Arial,sans-serif">STEP 6 — SENDS IT OUT</text>
+<rect x="190" y="1202" width="640" height="138" rx="12" fill="#dcfce7" stroke="#15803d" stroke-width="1.8"/>
+<text x="510.0" y="1233" text-anchor="middle" font-size="17" font-weight="700" fill="#14532d" font-family="Helvetica,Arial,sans-serif">Emails each recipient individually via Gmail</text>
+<text x="510.0" y="1258" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">Every send is logged as SENT or FAILED, so a bad address never blocks the others or goes</text>
+<text x="510.0" y="1276" text-anchor="middle" font-size="13" fill="#4b5563" font-family="Helvetica,Arial,sans-serif">unnoticed</text>
+<rect x="368.35" y="1289" width="283.3" height="26" rx="10" fill="#ffffff" stroke="#15803d" stroke-width="1.2" opacity="0.9"/>
+<text x="510.0" y="1304" text-anchor="middle" font-size="11.5" fill="#15803d" font-family="Menlo,Consolas,monospace" font-weight="600">email_sender.py → Gmail SMTP → EmailLog</text>
+<line x1="90" y1="1374" x2="1010" y2="1374" stroke="#e5e7eb" stroke-width="1"/>
+<text x="550.0" y="1398" text-anchor="middle" font-size="12" fill="#9ca3af" font-family="Helvetica,Arial,sans-serif">Used throughout: <tspan font-weight="700" fill="#6b7280">settings.py</tspan> loads every credential from .env — Postgres, Gemini, FRED, and Gmail logins</text>
+</svg>
