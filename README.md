@@ -6,6 +6,10 @@ Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
 
 Sample output screenshots are in sample_output/
 
+## Architecture
+![Architecture Diagram](./architecture/how_it_works.svg)
+
+
 # What the report covers
 
 Global equity indices — US, Europe, Japan, China, India with 10-day return and volatility
