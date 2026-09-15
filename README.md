@@ -4,17 +4,21 @@ A self-contained pipeline that fetches global market data, runs a signal engine,
 
 Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
 
-## Output 
+## Output
 
-![1](sample_output/1.jpeg)
-
-![2](sample_output/2.jpeg)
-
-![3](sample_output/3.jpeg)
-
-![4](sample_output/4.jpeg)
-
-![5](sample_output/5.jpeg)
+<table>
+  <tr>
+    <td><img src="sample_output/1.jpeg" width="400"></td>
+    <td><img src="sample_output/2.jpeg" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="sample_output/3.jpeg" width="400"></td>
+    <td><img src="sample_output/4.jpeg" width="400"></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="sample_output/5.jpeg" width="400"></td>
+  </tr>
+</table>
 
 
 
