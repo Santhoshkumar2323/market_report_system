@@ -7,19 +7,36 @@ Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
 ## Output
 
 <table>
+
   <tr>
-    <td><img src="sample_output/1.jpeg" width="400"></td>
-    <td><img src="sample_output/2.jpeg" width="400"></td>
+    <td align="center">
+      <img src="sample_output/1.jpeg" width="250"><br>
+      <b>Global indices</b>
+    </td>
+    <td align="center">
+      <img src="sample_output/2.jpeg" width="250"><br>
+      <b>US & India sectors</b>
+    </td>
   </tr>
+ 
   <tr>
-    <td><img src="sample_output/3.jpeg" width="400"></td>
-    <td><img src="sample_output/4.jpeg" width="400"></td>
+    <td align="center">
+      <img src="sample_output/3.jpeg" width="250"><br>
+      <b>Macro's</b>
+    </td>
+    <td align="center">
+      <img src="sample_output/4.jpeg" width="250"><br>
+      <b>FRED data</b>
+    </td>
   </tr>
+
   <tr>
-    <td colspan="2" align="center"><img src="sample_output/5.jpeg" width="400"></td>
+    <td colspan="2" align="center">
+      <img src="sample_output/5.jpeg" width="250"><br>
+      <b>LLM model commentary</b>
+    </td>
   </tr>
 </table>
-
 
 
 ## Architecture
