@@ -4,7 +4,19 @@ A self-contained pipeline that fetches global market data, runs a signal engine,
 
 Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
 
-Sample output screenshots are in sample_output/
+## Output 
+
+![1](sample_output/1.jpeg)
+
+![2](sample_output/2.jpeg)
+
+![3](sample_output/3.jpeg)
+
+![4](sample_output/4.jpeg)
+
+![5](sample_output/5.jpeg)
+
+
 
 ## Architecture
 ![Architecture Diagram](./architecture/how_it_works.svg)
