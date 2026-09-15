@@ -7,7 +7,6 @@ Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
 ## Output
 
 <table>
-
   <tr>
     <td align="center">
       <img src="sample_output/1.jpeg" width="250"><br>
@@ -19,6 +18,8 @@ Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
     </td>
   </tr>
  
+  <tr><td colspan="2" style="padding: 15px 0;"></td></tr>
+
   <tr>
     <td align="center">
       <img src="sample_output/3.jpeg" width="250"><br>
@@ -29,6 +30,8 @@ Built with Python, PostgreSQL, yfinance, FRED API, and Gemini.
       <b>FRED data</b>
     </td>
   </tr>
+
+  <tr><td colspan="2" style="padding: 15px 0;"></td></tr>
 
   <tr>
     <td colspan="2" align="center">
